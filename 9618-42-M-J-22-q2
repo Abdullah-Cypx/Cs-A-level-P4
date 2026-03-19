@@ -1,0 +1,43 @@
+import random
+
+def Output():
+    for r in range(10):
+        for c in range(10):
+            print(f"{Array[r][c]} ", end='')
+        print("")
+
+
+Array = [[0] * 10 for i in range(10)]
+    
+for row in range(10):
+    for col in range(10):
+        Array[row][col] = random.randint(1,100)
+
+print("B")
+Output()
+
+ArrayLen = 10
+for x in range(0, ArrayLen):
+    for y in range(0, ArrayLen-1):
+        for z in range(0, ArrayLen-y-1):
+            if Array[x][z] > Array[x][z+1]:
+                temp = Array[x][z]
+                Array[x][z] = Array[x][z+1]
+                Array[x][z+1] = temp
+print("A")
+Output()
+
+def BinarySearch(SA, Lower, Upper, SV):
+    if Upper >= Lower:
+        Mid = int((Lower+(Upper-1)) / 2)
+        if SA[0][Mid] ==  SV:
+            return Mid
+        else:
+            if SA[0][Mid] > SV:
+                return BinarySearch(SA, Lower, Mid-1, SV)
+            else:
+                return BinarySearch(SA, Mid+1, Upper, SV)
+    return -1
+
+inp = int(input("Enter the number: "))
+print(BinarySearch(Array, 0, 10, inp))
