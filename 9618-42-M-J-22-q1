@@ -1,0 +1,42 @@
+global StackData
+global StackPointer
+
+StackData = []
+StackPointer = 0
+
+def Output():
+    for i in StackData:
+        print(i)
+    print(f"The pointer is at location {StackPointer}")
+
+def Push(Data):
+    global StackData
+    global StackPointer
+    if StackPointer == 10:
+        return False
+    else:
+        StackData.append(Data)
+        StackPointer += 1
+        return True
+    
+def Pop():
+    global StackData
+    global StackPointer
+    if StackPointer == 0:
+        return -1
+    else:
+        StackPointer -= 1
+        return StackData[StackPointer]
+    
+#Main Program
+for i in range(11):
+    num = int(input("Enter the number: "))
+    Result = Push(num)
+    if Result == True:
+        print("Data Added Succesfully")
+    else:
+        print("Stack Full")
+Pop()
+Pop()
+
+Output()
