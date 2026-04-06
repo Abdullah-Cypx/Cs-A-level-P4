@@ -1,0 +1,48 @@
+#9618/41/O/N/25
+import random
+
+Stack = [0]*30
+TopOfStack = -1
+
+def Push(data, TOS):
+
+    if TOS >= 29:
+        return False, TOS
+    else:
+        TOS += 1
+        Stack[TopOfStack] = data
+        return True, TOS
+
+def Pop(TOS):
+
+    if TOS == -1:
+        return -999, TOS
+    else:
+        Data = Stack[TOS]
+        TOS -= 1
+        return Data, TOS
+    
+
+for i in range(40):
+    Pushed, TopOfStack = Push(random.randint(0,1000), TopOfStack)
+    if Pushed == False:
+        print("Stack Full")
+        break
+
+#Main Program
+def FindValues(TOS):
+    smallest = 1000
+    largest = 0
+
+    check, TOS = Pop(TOS)
+    while check != -999:
+        if check < smallest:
+            smallest = check
+        if check > largest:
+            largest = check
+        check, TOS = Pop(TOS)
+
+    print("The largest number that was in stack is", largest)
+    print("The smallest number that was in stack is", smallest)
+
+FindValues(TopOfStack)
