@@ -1,0 +1,66 @@
+class vehicle:
+
+    def __init__(self, pID, pMaxSpeed, pIncreaseAmount):
+        self.__CurrentSpeed = 0
+        self.__HorizontalPositon = 0
+        self.__ID = pID
+        self.__MaxSpeed = pMaxSpeed
+        self.__IncreaseAm = pIncreaseAmount
+
+    def GetCurrentSpeed(self):
+        return self.__CurrentSpeed
+    
+    def GetIncreaseAmount(self):
+        return self.__IncreaseAm
+    
+    def GetHorizontalPositon(self):
+        return self.__HorizontalPositon
+    
+    def SetCurrentSpeed(self, CS):
+        self.__CurrentSpeed = CS
+
+    def SetHorizontalPositon(self, HP):
+        self.__HorizontalPositon = HP
+
+    def IncreaseSpeed(self):
+        self.__CurrentSpeed += self.__IncreaseAm
+        if self.__CurrentSpeed > self.__MaxSpeed:
+            self.__CurrentSpeed = self.__MaxSpeed
+        self.__HorizontalPositon += self.__CurrentSpeed
+    
+    def OutputAll(self):
+        print(self.GetHorizontalPositon())
+        print(self.GetCurrentSpeed)
+
+
+class Helicopter(vehicle):
+
+    def __init__(self, pID, pMaxSpeed, pIncreaseAmount, pVerticalChange, pMaxHeight):
+        super().__init__(pID, pMaxSpeed, pIncreaseAmount)
+        self.__VerticalC = pVerticalChange
+        self.__MaxHeight = pMaxHeight
+        self.__VerticalPositon = 0
+
+    def IncreaseSpeed(self):
+        self.__VerticalPositon += self.__VerticalC
+        if self.__VerticalPositon > self.__MaxHeight:
+            self.__VerticalPositon = self.__MaxHeight
+        return super().IncreaseSpeed()
+    
+    def OutputAll(self):
+        print(self.GetHorizontalPositon())
+        print(self.GetCurrentSpeed())
+        print(self.__VerticalPositon)
+
+        
+
+#Main Program
+Car = vehicle("Tiger", 100, 20)
+Heli = Helicopter("Lion", 350, 40, 3, 100)
+Car.IncreaseSpeed()
+Car.IncreaseSpeed()
+Car.OutputAll()
+print("")
+Heli.IncreaseSpeed()
+Heli.IncreaseSpeed()
+Heli.OutputAll()
