@@ -1,0 +1,62 @@
+#a
+#i)
+class Bird:
+
+    def __init__(self, pSpecies, pDistancePerHour):
+        self.__Species = pSpecies
+        self.__DistancePerHour = pDistancePerHour
+        self.__XPosition = 500.0
+        self.__YPosition = 500.0
+
+#ii)
+
+    def GetSpecies(self):
+        return self.__Species
+
+#iii)
+   
+    def GetPosition(self):
+        string = f"X = {self.__XPosition} Y = {self.__YPosition}"
+        return string
+    
+#iv)
+
+    def Move(self, DT, Time):
+        Distance = (self.__DistancePerHour/60) * Time
+        if DT == 'N':
+            self.__YPosition += Distance
+        elif DT == 'S':
+            self.__YPosition -= Distance
+        elif DT == 'E':
+            self.__XPosition += Distance
+        elif DT == 'W':
+            self.__XPosition -= Distance
+
+#b
+#Main Program
+FirstBird = Bird("Cockatiel", 71.0)
+SecondBird = Bird("Macaw", 56.0)
+
+print(f"The First bird is {FirstBird.GetSpecies()} and the position is {FirstBird.GetPosition()}")
+print(f"The First bird is {SecondBird.GetSpecies()} and the position is {SecondBird.GetPosition()}")
+
+Choice = int(input("Please choose bird 1 or bird 2"))
+while Choice != 1 and Choice != 2:
+    Choice = int(input("Please rechoose bird 1 or bird 2: "))
+
+Direction = str(input("Please choose direction (N,S,E,W): ")).upper()
+while Direction != 'N' and Direction != 'S' and Direction != 'E' and Direction != 'W':
+    Direction = str("Please choose direction (N,S,E,W): ")
+
+Time = int(input("Please enter time to nearest minute: "))
+
+if Choice == 1:
+    FirstBird.Move(Direction,Time)
+    print(f"New Position: {FirstBird.GetPosition()}")
+    print(f"New Position: {SecondBird.GetPosition()}")
+elif Choice == 2:
+    SecondBird.Move(Direction,Time)
+    print(f"New Position: {FirstBird.GetPosition()}")
+    print(f"New Position: {SecondBird.GetPosition()}")
+
+    
